@@ -1,0 +1,24 @@
+{
+  "name": "exit",
+  "version": "1.0.0",
+  "description": "Projeto teste de controle remoto de lampada",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "firebase": "^8.3.0",
+    "johnny-five": "^2.0.0"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/poldeve/workflow-tcc.git"
+  },
+  "bugs": {
+    "url": "https://github.com/poldeve/workflow-tcc/issues"
+  },
+  "homepage": "https://github.com/poldeve/workflow-tcc#readme"
+}
