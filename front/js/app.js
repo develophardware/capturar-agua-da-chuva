@@ -1,19 +1,29 @@
-const { Board, Proximity } = require("johnny-five");
+const five = require("johnny-five");
+const firebase = require("firebase");
+const { Board, Proximity, Servo } = require("johnny-five");
 const board = new Board();
 
 board.on("ready", function() {
-    sensorChuva();
-    motorCalha();
-    cisternaUm();
-    cisternaDois();
-    //teste
-});
-
-function sensorChuva() {
     const sensor_chuva = new five.Sensor({
         pin: "A3",
-        freq: 3000,
+        freq: 5000,
+        //threshold: 5
     });
+    const motor_calha = new five.Servo({
+        pin: 7,
+        center: true
+    });
+    const cisterna1 = new Proximity({
+        controller: "HCSR04",
+        pin: "A2", // parametro de entrada
+        freq: 5000, //frequencia de leitira do sensor, aproximadamente 5 segundos
+    });
+    const cisterna2 = new Proximity({
+        controller: "HCSR04",
+        pin: "A3", // parametro de entrada
+        freq: 5000, //frequencia de leitira do sensor, aproximadamente 5 segundos
+    });
+
 
     sensor_chuva.on("change", function() {
         if (sensor_chuva.value <= 400) {
@@ -26,23 +36,8 @@ function sensorChuva() {
             console.log("  Sem chuva : ", sensor_chuva.value);
         }
     });
-}
-
-function motorCalha() {
-    const motor_calha = new five.Servo({
-        pin: 7,
-        center: true
-    });
 
     motor_calha.to(180);
-}
-
-function cisternaUm() {
-    const cisterna1 = new Proximity({
-        controller: "HCSR04",
-        pin: "A0", // parametro de entrada
-        freq: 5000, //frequencia de leitira do sensor, aproximadamente 5 segundos
-    });
 
     cisterna1.on("change", function() {
         const { centimeters, inches } = proximity;
@@ -62,15 +57,6 @@ function cisternaUm() {
 
     });
 
-}
-
-function cisternaDois() {
-    const cisterna2 = new Proximity({
-        controller: "HCSR04",
-        pin: "A1", // parametro de entrada
-        freq: 5000, //frequencia de leitira do sensor, aproximadamente 5 segundos
-    });
-
     cisterna2.on("change", function() {
         const { centimeters, inches } = proximity;
         //console.log("Nível da Água: ");
@@ -88,4 +74,7 @@ function cisternaDois() {
         console.log("-----------------");
 
     });
-}
+
+
+
+});

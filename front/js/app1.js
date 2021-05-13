@@ -2,8 +2,15 @@ const { Board, Proximity } = require("johnny-five");
 const board = new Board();
 
 board.on("ready", function() {
+    sensorChuva();
+    motorCalha();
+    cisternaUm();
+    cisternaDois();
+    //teste
+});
 
-    var sensor_chuva = new five.Sensor({
+function sensorChuva() {
+    const sensor_chuva = new five.Sensor({
         pin: "A3",
         freq: 3000,
     });
@@ -19,15 +26,18 @@ board.on("ready", function() {
             console.log("  Sem chuva : ", sensor_chuva.value);
         }
     });
+}
 
+function motorCalha() {
     const motor_calha = new five.Servo({
         pin: 7,
         center: true
     });
 
     motor_calha.to(180);
+}
 
-
+function cisternaUm() {
     const cisterna1 = new Proximity({
         controller: "HCSR04",
         pin: "A0", // parametro de entrada
@@ -52,6 +62,9 @@ board.on("ready", function() {
 
     });
 
+}
+
+function cisternaDois() {
     const cisterna2 = new Proximity({
         controller: "HCSR04",
         pin: "A1", // parametro de entrada
@@ -75,7 +88,4 @@ board.on("ready", function() {
         console.log("-----------------");
 
     });
-
-
-
-});
+}
