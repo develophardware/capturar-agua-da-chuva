@@ -1,11 +1,11 @@
 const five = require("johnny-five");
-const firebase = require("firebase");
+// const firebase = require("firebase"); // falta incluir as configurações do firebase
 const { Board, Proximity, Servo } = require("johnny-five");
 const board = new Board();
 
 board.on("ready", function() {
     const sensor_chuva = new five.Sensor({
-        pin: "A3",
+        pin: "A1",
         freq: 5000,
         //threshold: 5
     });
