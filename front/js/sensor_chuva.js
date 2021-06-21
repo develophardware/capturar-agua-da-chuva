@@ -5,7 +5,7 @@ board.on("ready", function() {
 
     //var sensor = new five.Sensor("A3");
     var sensor = new five.Sensor({
-        pin: "A3",
+        pin: "A1",
         freq: 5000,
         //threshold: 5
     });

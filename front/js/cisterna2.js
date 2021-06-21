@@ -10,7 +10,7 @@ let conversao5; //parametro de saida
 board.on("ready", () => {
     const proximity = new Proximity({
         controller: "HCSR04",
-        pin: "A1", // parametro de entrada
+        pin: "A3", // parametro de entrada
         freq: 5000, //frequencia de leitira do sensor, aproximadamente 5 segundos
     });
 
