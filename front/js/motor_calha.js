@@ -22,5 +22,5 @@ board.on("ready", () => {
     }).on("close", () => process.exit(0));
 });
 
-//Referencia de posição do servo, lado direito enchendo com calaha lado esquedo levantada 80º pra menos <-
+//Referencia de posição do servo, lado direito enchendo com calaha lado esquedo levantada 81º pra menos <-
 // Referencia de posição servo, lado esquerdo enchendo com calha lado direito levantada posição 93° pra mais ->
