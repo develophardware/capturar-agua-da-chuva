@@ -1,0 +1,17 @@
+<html>
+
+<body>
+    <script type="text/javascript">
+        var userip;
+    </script>
+
+    <script type="text/javascript" src="https://l2.io/ip.js?var=userip"></script>
+
+    <script type="text/javascript">
+        $.getJSON("//freegeoip.net/json/", function(data) {
+            console.info(JSON.stringify(data));
+        });
+    </script>
+</body>
+
+</html>

@@ -1,25 +1,27 @@
 {
-  "name": "exit",
-  "version": "1.0.0",
-  "description": "Projeto teste de controle remoto de lampada",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "express": "^4.17.1",
-    "firebase": "^8.3.0",
-    "johnny-five": "^2.0.0"
-  },
-  "devDependencies": {},
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/poldeve/workflow-tcc.git"
-  },
-  "bugs": {
-    "url": "https://github.com/poldeve/workflow-tcc/issues"
-  },
-  "homepage": "https://github.com/poldeve/workflow-tcc#readme"
+    "name": "exit",
+    "version": "1.0.0",
+    "description": "Sistema de Captura de Água de Chuva",
+    "main": "app.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "express": "^4.17.1",
+        "firebase": "^8.3.0",
+        "johnny-five": "^2.0.0",
+        "mysql2": "^2.2.5",
+        "sequelize": "^6.6.4"
+    },
+    "devDependencies": {},
+    "repository": {
+        "type": "git",
+        "url": "git+https://https://github.com/poldevelophardware/capturar-agua-da-chuva.git"
+    },
+    "bugs": {
+        "url": "https://https://github.com/poldevelophardware/capturar-agua-da-chuva/issues"
+    },
+    "homepage": "https://https://github.com/poldevelophardware/capturar-agua-da-chuva#readme"
 }
