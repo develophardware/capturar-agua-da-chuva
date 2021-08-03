@@ -5,5 +5,4 @@ let mes = dt.getUTCMonth();
 let ano = dt.getFullYear();
 let hora = dt.getTime();
 
-
-console.log(dt);
+//console.log(dt);
