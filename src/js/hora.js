@@ -6,4 +6,4 @@ let ano = dt.getFullYear();
 let hora = dt.getTime();
 
 
-console.log(dia + "/" + mes + "/" + ano + ":" + hora);
+console.log(dt);

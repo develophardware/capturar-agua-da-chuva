@@ -2,7 +2,7 @@ const { Board, Proximity } = require("johnny-five");
 const board = new Board();
 
 let conversao1;
-let conversao2 = 16.60 // Valor da base do recipiente até o sensor 
+let conversao2 = 17 // Valor da base do recipiente até o sensor 
 let conversao3;
 let conversao4;
 //let conversao5;
