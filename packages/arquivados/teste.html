@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Home</title>
+    <script src="/src/js/jquery.js" diff></script>
+    <script src="/src/js/jquery.knob.js" diff></script>
+    <script type="text / javascript" src="../../ scripts / jquery-1.11.1.min.js"> </script>
+    <script type="text / javascript" src="../../ jqwidgets / jqxcore.js"> </script>
+    <script type="text / javascript" src="../../ jqwidgets / jqxdraw.js"> </script>
+    <script type="text / javascript" src="../../ jqwidgets / jqxknob.js"> </script>
+    <script type="text / javascript" src="../../ jqwidgets / jqxnumberinput.js"> </script>
+    <style>
+        #container {
+            posição: relativa;
+        }
+        
+        .campo de entrada {
+            esquerda: 110px;
+            topo: 163px;
+            posição: absoluta;
+            fundo: transparente;
+            fronteira: nenhum;
+        }
+        
+        .inputField .jqx-input-content {
+            fundo: transparente;
+            tamanho da fonte: 45px;
+        }
+    </style>
+    <script>
+        $(document).ready(function() {
+            $('#container').jqxKnob({
+                valor: 10,
+                min: 0,
+                máx: 100,
+                startAngle: 90,
+                endAngle: 450,
+                snapToStep: true,
+                pointerGrabAction: 'progressBar',
+                rotação: 'sentido horário',
+                estilo: {
+                    preencher: 'transparente'
+                },
+                Barra de progresso: {
+                    style: {
+                        fill: {
+                            color: '# 00a4e1',
+                            gradientType: 'radial',
+                            gradientStops: [
+                                [0, 0.5],
+                                [100, 1]
+                            ]
+                        }
+                    },
+                    tamanho: '50% ',
+                    deslocamento: '50% ',
+                    fundo: {
+                        preenchimento: {
+                            cor: '#FFFFFF',
+                            gradienteTipo: 'linear',
+                            gradienteStops: [
+                                [0, 0, 5],
+                                [100, 1]
+                            ]
+                        }
+                    }
+                },
+                ponteiro: {
+                    tipo: 'linha',
+                    estilo: {
+                        preenchimento: '# 00a4e1'
+                    },
+                    tamanho: '50% ',
+                    deslocamento: '50%',
+                    espessura: 0
+                }
+            });
+            var input = $(' <div class = "inputField" > ');
+            $('#container').append(input);
+            var inputOptions = {
+                largura: 180,
+                altura: '75px',
+                decimal: 0, // valor inicial igual ao widget
+                min: 0, // igual ao widget
+                máx: 100, // igual ao widget
+                textAlign: 'center',
+                Digitos decimais: 1,
+                símbolo: '%',
+                symbolPosition: 'right',
+                inputMode: 'simples'
+            };
+            $(entrada).jqxNumberInput(inputOptions);
+            $(entrada).on('mousedown', função(evento) {
+                event.stopPropagation();
+            });
+            $(input).on('keyup', function() {
+                var val = $(este).val();
+                $('#container').val(val);
+            });
+            $(entrada).on('alterar', função() {
+                var val = $(este).val();
+                $('#container').val(val);
+            });
+            $('#container').on('alterar', função(evento) {
+                if (event.args.changeSource == 'propertyChange' || event.args.changeSource == 'val') {
+                    return;
+                }
+                $(entrada).val(event.args.value);
+            })
+        });
+    </script>
+</head>
+
+<body class='default'>
+    <div id='container' style=" largura: 400px; altura: 400px;">
+    </div>
+</body>
+
+</html>
