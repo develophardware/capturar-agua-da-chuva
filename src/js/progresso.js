@@ -6,7 +6,7 @@ $(document).ready(function() {
         'width': 250,
         'height': 250,
         'displayInput': true,
-        'fgColor': "#e74c3c",
+        'fgColor': "#00BFFF",
         'release': function(v) { $("p").number(v); },
         'readOnly': true
     });
