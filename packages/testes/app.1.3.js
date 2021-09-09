@@ -1,5 +1,4 @@
 const five = require("johnny-five");
-const firebase = require("firebase");
 const { Board, Proximity, Servo } = require("johnny-five");
 const board = new Board();
 

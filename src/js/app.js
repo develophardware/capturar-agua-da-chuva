@@ -1,5 +1,4 @@
 const five = require("johnny-five");
-const firebase = require("firebase");
 const { Board, Proximity, Servo } = require("johnny-five");
 const board = new Board();
 
@@ -14,13 +13,14 @@ let cisterna2_conversao2 = 16.40 // Valor da base do recipiente até o sensor
 let cisterna2_conversao3;
 let cisterna2_conversao4;
 let cisterna2_conversao5;
+let teste;
 
 
 
 board.on("ready", function() {
     const sensor_chuva = new five.Sensor({
         pin: "A1",
-        freq: 50000, //frequencia de leitira do sensor, aproximadamente 5 minutos
+        freq: 5000, //frequencia de leitira do sensor, aproximadamente 5 segundos
     });
     const motor_calha = new five.Servo({
         pin: 2,
@@ -29,12 +29,12 @@ board.on("ready", function() {
     const cisterna1 = new Proximity({
         controller: "HCSR04",
         pin: "A2", // parametro de entrada LD esquerdo da telha
-        freq: 50000, //frequencia de leitira do sensor, aproximadamente 5 minutos
+        freq: 5000, //frequencia de leitira do sensor, aproximadamente 5 segundos
     });
     const cisterna2 = new Proximity({
         controller: "HCSR04",
         pin: "A3", // parametro de entrada LD direito da telha
-        freq: 50000, //frequencia de leitira do sensor, aproximadamente 5 minutos
+        freq: 5000, //frequencia de leitira do sensor, aproximadamente 5 segundos
     });
 
     sensor_chuva.on("change", function() {
@@ -93,8 +93,8 @@ board.on("ready", function() {
         console.log("Data e Hora");
         console.log("");
         console.log("");
+        teste = cisterna2_conversao4;
     });
-
 
 
 
