@@ -1,2 +1,2 @@
 # capturar-agua-da-chuva
-Sistema de captura de água da chuva.
+Sistema de captação de água da chuva.
