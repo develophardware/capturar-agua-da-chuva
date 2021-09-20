@@ -29,6 +29,12 @@ async function script() {
 
     // console.log(formatacoes.convertUTCDateToLocalDate(new Date()));
     await controller.verificaEconomiaRealizada();
+
+    var interval = setInterval(async function() {
+        await controller.verificaEconomiaRealizada();
+      }, 10000);
+      
+    //   clearInterval(interval);
 };
 	
 script();
