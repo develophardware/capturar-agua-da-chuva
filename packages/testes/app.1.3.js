@@ -1,5 +1,4 @@
 const five = require("johnny-five");
-const firebase = require("firebase");
 const { Board, Proximity, Servo } = require("johnny-five");
 const board = new Board();
 
@@ -7,13 +6,13 @@ let cisterna1_conversao1;
 let cisterna1_conversao2 = 16.5 // Valor da base do recipiente até o sensor 
 let cisterna1_conversao3;
 let cisterna1_conversao4;
-let cisterna1_conversao5;
+//let cisterna1_conversao5;
 
 let cisterna2_conversao1;
 let cisterna2_conversao2 = 16.40 // Valor da base do recipiente até o sensor 
 let cisterna2_conversao3;
 let cisterna2_conversao4;
-let cisterna2_conversao5;
+//let cisterna2_conversao5;
 
 
 
