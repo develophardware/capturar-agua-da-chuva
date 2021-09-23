@@ -52,7 +52,7 @@ module.exports = {
                     reject();
                 }
     
-                let sql = 'UPDATE monitoramento set volume = ? WHERE recipiente_id = ?';
+                let sql = 'UPDATE monitoramento SET volume = ? WHERE recipiente_id = ?';
     
                 connection.query(sql, [ volume, recipiente_id ], function(error) {
                     if (error) {
@@ -72,7 +72,7 @@ module.exports = {
      * @param {Date} data dia em que a economia foi realizada
      * @returns sem retorno
      */
-    insereEconmiaRealizada: function(volume, data) {
+    insereEconmiaRealizada: function(data, qtd_litros_economizados) {
         return new Promise((resolve, reject) => {
             pool.getConnection(function(error, connection) {
                 if (error) {
@@ -89,7 +89,8 @@ module.exports = {
                         callback(true);
                         reject();
                     }
-                    console.log('Volume do recipiente ' + recipiente_id + ' atualizado para ' + volume);
+                    
+                    console.log('Criado registor de economia no dia ' + data + '. Volume registrado: ' + qtd_litros_economizados);
                     resolve();
                 });
             });
@@ -101,7 +102,7 @@ module.exports = {
      * @param {Date} data dia em que a economia foi realizada
      * @returns sem retorno
      */
-    atualizaEconmiaRealizada: function(volume, data) {
+    atualizaEconmiaRealizada: function(data, qtd_litros_economizados) {
         return new Promise((resolve, reject) => {
             pool.getConnection(function(error, connection) {
                 if (error) {
@@ -110,18 +111,47 @@ module.exports = {
                     reject();
                 }
     
-                let sql = 'UPDATE economia_realizada (qtd_litros_economizados) VALUES (?) WHERE data = ?';
+                let sql = 'UPDATE economia_realizada SET qtd_litros_economizados = ? WHERE data = ?';
     
-                connection.query(sql, [ volume, data ], function(error) {
+                connection.query(sql, [ qtd_litros_economizados, data ], function(error) {
                     if (error) {
                         console.error(error);
                         callback(true);
                         reject();
                     }
-                    console.log('Volume do recipiente ' + recipiente_id + ' atualizado para ' + volume);
+
+                    console.log('Volume economizado no dia ' + data + ' atualizado para: ' + qtd_litros_economizados);
                     resolve();
                 });
             });
         })
-	}
+	},
+    /**
+     * Função que verifica se existe um registro de volume economizado no dia
+     * @param {number} volume volume obtido no dia
+     * @param {Date} data dia em que a economia foi realizada
+     * @returns {Object} data e quantiade de litros
+     */
+     queryEconomiaRealizada: function(data) {
+        return new Promise((resolve, reject) => {
+            pool.getConnection(function(error, connection) {
+                if (error) {
+                    console.error(error);
+                    callback(true);
+                    reject();
+                }
+    
+                let sql = 'SELECT * from economia_realizada WHERE data = ?';
+    
+                connection.query(sql, [data], function(error, results) {
+                    if (error) {
+                        console.error(error);
+                        callback(true);
+                        reject();
+                    }
+                    resolve(results);
+                });
+            });
+        })
+	},
 };

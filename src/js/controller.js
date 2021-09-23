@@ -1,6 +1,6 @@
 const path = require("path");
 require("dotenv").config({ path: path.join(__dirname,"../.env") })
-var mysql = require('../db/mysql');
+const mysql = require('../db/mysql');
 const formatacoes = require('../utility/formatacoes');
 const sensores = require('./sensores');
 
@@ -10,27 +10,59 @@ module.exports = {
      * @returns 
      */
     verificaEconomiaRealizada: async function() {
-        // let volume_atual = await buscaVolumeRegistrado();
+        console.log('** Inicio do script **');
         let data_atual = formatacoes.convertUTCDateToLocalDate(new Date());
         let retorno = sensores.processaSensores();
-        console.log(retorno);
+        let volume_atual = retorno.cisterna1 + retorno.cisterna2;
+        let registro_db = await buscaVolumeRegistrado(data_atual);
+
+        // await mysql.insereEconmiaRealizada(data_atual, volume_atual)
 
         if(data_atual !== process.env.DATA_ECONOMIA) {
+
             process.env.DATA_ECONOMIA = data_atual;
-            console.log('** Variavel local que armazena a data da economia foi atualizada para: ' + process.env.DATA_ECONOMIA + ' **');
-        } else if(data_atual === process.env.DATA_ECONOMIA && volume_atual !== process.env.VOLUME_ECONOMIZADO) {
+
+            if(volume_atual > process.env.VOLUME_ECONOMIZADO) {
+
+                await mysql.insereEconmiaRealizada(data_atual, volume_atual - process.env.VOLUME_ECONOMIZADO)
+
+                process.env.VOLUME_ECONOMIZADO = volume_atual;
+                console.log('valor da variavei volume_economizado atualizado para: ', process.env.VOLUME_ECONOMIZADO);
+
+            } else if(volume_atual < process.env.VOLUME_ECONOMIZADO) {
+
+                process.env.VOLUME_ECONOMIZADO = volume_atual;
+                console.log('valor da variavei volume_economizado atualizado para: ', process.env.VOLUME_ECONOMIZADO);
+    
+            }
+
+        } else if(data_atual === process.env.DATA_ECONOMIA && volume_atual > process.env.VOLUME_ECONOMIZADO) {
+
+            await mysql.atualizaEconmiaRealizada(data_atual, registro_db.qtd_litros_economizados + volume_atual - process.env.VOLUME_ECONOMIZADO);
+
+            process.env.VOLUME_ECONOMIZADO = volume_atual;
+            console.log('valor da variavei volume_economizado atualizado para: ', process.env.VOLUME_ECONOMIZADO);
+
+        } else if(volume_atual < process.env.VOLUME_ECONOMIZADO) {
+
+            process.env.VOLUME_ECONOMIZADO = volume_atual;
+            console.log('valor da variavei volume_economizado atualizado para: ', process.env.VOLUME_ECONOMIZADO);
 
         }
+
+        await mysql.atualizaVolume(5, retorno.cisterna1);
+        await mysql.atualizaVolume(15, retorno.cisterna2);
+
+        console.log('** Fim do script **');
     }
 }
 
-async function buscaVolumeRegistrado() {
-    let volume_atual = 0;
+async function buscaVolumeRegistrado(data) {
+    let registro_atual;
 
-    await mysql.queryVolumes().then( results => (
-        volume_atual += results[0].volume,
-        volume_atual += results[1].volume
+    await mysql.queryEconomiaRealizada(data).then( results => (
+        registro_atual = results[0]
     ));
-
-    return volume_atual;
+    
+    return registro_atual;
 }
