@@ -16,7 +16,7 @@ module.exports = {
         let volume_atual = retorno.cisterna1 + retorno.cisterna2;
         let registro_db = await buscaVolumeRegistrado(data_atual);
 
-        // await mysql.insereEconmiaRealizada(data_atual, volume_atual)
+        // await mysql.insereEconomiaRealizada(data_atual, volume_atual)
 
         if(data_atual !== process.env.DATA_ECONOMIA) {
 
@@ -24,7 +24,7 @@ module.exports = {
 
             if(volume_atual > process.env.VOLUME_ECONOMIZADO) {
 
-                await mysql.insereEconmiaRealizada(data_atual, volume_atual - process.env.VOLUME_ECONOMIZADO)
+                await mysql.insereEconomiaRealizada(data_atual, volume_atual - process.env.VOLUME_ECONOMIZADO)
 
                 process.env.VOLUME_ECONOMIZADO = volume_atual;
                 console.log('valor da variavei volume_economizado atualizado para: ', process.env.VOLUME_ECONOMIZADO);
@@ -38,7 +38,7 @@ module.exports = {
 
         } else if(data_atual === process.env.DATA_ECONOMIA && volume_atual > process.env.VOLUME_ECONOMIZADO) {
 
-            await mysql.atualizaEconmiaRealizada(data_atual, registro_db.qtd_litros_economizados + volume_atual - process.env.VOLUME_ECONOMIZADO);
+            await mysql.atualizaEconomiaRealizada(data_atual, registro_db.qtd_litros_economizados + volume_atual - process.env.VOLUME_ECONOMIZADO);
 
             process.env.VOLUME_ECONOMIZADO = volume_atual;
             console.log('valor da variavei volume_economizado atualizado para: ', process.env.VOLUME_ECONOMIZADO);
@@ -47,6 +47,10 @@ module.exports = {
 
             process.env.VOLUME_ECONOMIZADO = volume_atual;
             console.log('valor da variavei volume_economizado atualizado para: ', process.env.VOLUME_ECONOMIZADO);
+
+        } else if(!registro_db) {
+
+            await mysql.insereEconomiaRealizada(data_atual, 0)
 
         }
 
