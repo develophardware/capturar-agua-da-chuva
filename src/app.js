@@ -9,7 +9,7 @@ console.log('** APLICAÇÃO INICIALIZADA **');
 
 async function start() {
     // Ao inicializar a aplicação, o valor da variavel de ambiente VOLUME_ECONOMIZADO é setada como a soma de ambas as cisternas
-    let retorno = sensores.processaSensores();
+    let retorno = await sensores.processaSensores();
     process.env.VOLUME_ECONOMIZADO = retorno.cisterna1 + retorno.cisterna2;
 
     // Ao inicializar a aplicação, o valor da variavel de ambiente DATA_ECONOMIA é setada como a data do dia
