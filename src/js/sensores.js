@@ -1,6 +1,7 @@
 const five = require('johnny-five');
 const { Board, Proximity, Servo } = require('johnny-five');
 const board = new Board();
+const path = require("path");
 require("dotenv").config({ path: path.join(__dirname,"../.env") })
 
 let cisterna1_conversao1;
