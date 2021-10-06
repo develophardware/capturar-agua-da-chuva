@@ -167,7 +167,7 @@ module.exports = {
                     reject();
                 }
     
-                let sql = 'SELECT qtd_litros_economizados FROM economia_realizada ORDER BY ID DESC LIMIT 1?';
+                let sql = 'SELECT qtd_litros_economizados FROM economia_realizada ORDER BY ID DESC LIMIT 1';
     
                 connection.query(sql, [], function(error, results) {
                     if (error) {
