@@ -149,7 +149,7 @@ module.exports = {
                         callback(true);
                         reject();
                     }
-                    resolve(results[0]);
+                    resolve(results);
                 });
             });
         })
@@ -175,7 +175,7 @@ module.exports = {
                         callback(true);
                         reject();
                     }
-                    resolve(results);
+                    resolve(results[0]);
                 });
             });
         })
