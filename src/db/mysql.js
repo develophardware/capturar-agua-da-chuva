@@ -149,7 +149,7 @@ module.exports = {
                         callback(true);
                         reject();
                     }
-                    resolve(results);
+                    resolve(results[0]);
                 });
             });
         })
