@@ -37,12 +37,12 @@ module.exports = {
 
         } else if(data_atual === process.env.DATA_ECONOMIA && volume_atual > process.env.VOLUME_ECONOMIZADO) {
 
-            await mysql.atualizaEconomiaRealizada(data_atual, registro_db.qtd_litros_economizados + volume_atual - process.env.VOLUME_ECONOMIZADO);
+            await mysql.atualizaEconmiaRealizada(data_atual, registro_db.qtd_litros_economizados + volume_atual - process.env.VOLUME_ECONOMIZADO);
 
             process.env.VOLUME_ECONOMIZADO = volume_atual;
             console.log('valor da variavei volume_economizado atualizado para: ', process.env.VOLUME_ECONOMIZADO);
 
-        } else if(volume_atual < process.env.VOLUME_ECONOMIZADO) {
+        } else if(data_atual === process.env.DATA_ECONOMIA && volume_atual < process.env.VOLUME_ECONOMIZADO) {
 
             process.env.VOLUME_ECONOMIZADO = volume_atual;
             console.log('valor da variavei volume_economizado atualizado para: ', process.env.VOLUME_ECONOMIZADO);
