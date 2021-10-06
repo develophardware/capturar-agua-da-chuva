@@ -154,4 +154,30 @@ module.exports = {
             });
         })
 	},
+    /**
+     * Busca o ultimo registro da tabela economia_realizada
+     * @returns {number} quantiade de litros
+     */
+     queryUltimaEconomiaRealizada: function() {
+        return new Promise((resolve, reject) => {
+            pool.getConnection(function(error, connection) {
+                if (error) {
+                    console.error(error);
+                    callback(true);
+                    reject();
+                }
+    
+                let sql = 'SELECT qtd_litros_economizados FROM economia_realizada ORDER BY ID DESC LIMIT 1?';
+    
+                connection.query(sql, [], function(error, results) {
+                    if (error) {
+                        console.error(error);
+                        callback(true);
+                        reject();
+                    }
+                    resolve(results);
+                });
+            });
+        })
+	},
 };

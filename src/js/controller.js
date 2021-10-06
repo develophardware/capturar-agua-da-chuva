@@ -12,8 +12,7 @@ module.exports = {
     verificaEconomiaRealizada: async function() {
         console.log('** Inicio do script **');
         let data_atual = formatacoes.convertUTCDateToLocalDate(new Date());
-        let retorno = sensores.processaSensores();
-        let volume_atual = retorno.cisterna1 + retorno.cisterna2;
+        let volume_atual = process.env.VOLUME_CISTERNA1 + process.env.VOLUME_CISTERNA2
         let registro_db = await buscaVolumeRegistrado(data_atual);
 
         // await mysql.insereEconomiaRealizada(data_atual, volume_atual)
@@ -54,8 +53,8 @@ module.exports = {
 
         }
 
-        await mysql.atualizaVolume(5, retorno.cisterna1);
-        await mysql.atualizaVolume(15, retorno.cisterna2);
+        await mysql.atualizaVolume(5, process.env.VOLUME_CISTERNA1);
+        await mysql.atualizaVolume(15, process.env.VOLUME_CISTERNA2);
 
         console.log('** Fim do script **');
     }
