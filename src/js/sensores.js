@@ -17,6 +17,8 @@ let teste;
 
 module.exports = {
 	processaSensores: function() {
+        let volumeCisterna1 = 0;
+        let volumeCisterna2 = 0;
 		return new Promise((resolve, reject) => {
 			board.on('ready', function() {
 				const sensor_chuva = new five.Sensor({
@@ -60,7 +62,7 @@ module.exports = {
 					}
 				});
 
-				cisterna1.on('change', function() {
+				volumeCisterna1 = cisterna1.on('change', function() {
 					const { centimeters, inches } = cisterna1;
 					console.log('| 1° Primeira Cisterna |');
 					console.log('-----------------');
@@ -76,9 +78,10 @@ module.exports = {
 					console.log('Data e Hora');
 					console.log('');
 					console.log('');
+                    return parseNumber(cisterna1_conversao4.toFixed(0));
 				});
 
-				cisterna2.on('change', function() {
+				volumeCisterna2 = cisterna2.on('change', function() {
 					const { centimeters, inches } = cisterna2;
 					console.log('| 2° Segunda Cisterna |');
 					cisterna2_conversao1 = (centimeters - cisterna2_conversao2) * -1; //Converter o valor de 16.40 > 0 para 0 > 16.40 altura recipiente
@@ -93,10 +96,10 @@ module.exports = {
 					console.log('Data e Hora');
 					console.log('');
 					console.log('');
-					teste = cisterna2_conversao4;
+                    return parseNumber(cisterna2_conversao4.toFixed(0));
 				});
 
-				resolve({ cisterna1: cisterna1_conversao4, cisterna2: cisterna2_conversao4 });
+				resolve({ cisterna1: volumeCisterna1, cisterna2: volumeCisterna2 });
 			});
 			// return {cisterna1: 300, cisterna2: 300}
 		});
