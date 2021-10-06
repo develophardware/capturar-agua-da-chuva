@@ -102,7 +102,7 @@ module.exports = {
      * @param {Date} data dia em que a economia foi realizada
      * @returns sem retorno
      */
-    atualizaEconmiaRealizada: function(data, qtd_litros_economizados) {
+    atualizaEconomiaRealizada: function(data, qtd_litros_economizados) {
         return new Promise((resolve, reject) => {
             pool.getConnection(function(error, connection) {
                 if (error) {
