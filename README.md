@@ -1,5 +1,5 @@
-# capturar-agua-da-chuva
-Sistema de captação de água da chuva.
+# Sistema de Captação de Água da Chuva
+
 
 O sistema tem como objetivo capturar água da chuva, informar ao usuário a quantidade de água capturada, qual o ganho e perca, informar os níveis de água dos reservatórios.
 
