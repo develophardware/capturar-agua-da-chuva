@@ -18,7 +18,6 @@ module.exports = {
         return new Promise((resolve, reject) => {
             pool.getConnection(function(error, connection) {
                 if (error) {
-                    connection.release();
                     console.error(error);
                     reject();
                 }
@@ -28,8 +27,10 @@ module.exports = {
                 connection.query(sql, [], function(error, results) {
                     if (error) {
                         console.error(error);
+                        connection.release();
                         reject();
                     }
+                    connection.release();
                     resolve(results);
                 });
 
@@ -55,9 +56,11 @@ module.exports = {
                 connection.query(sql, [volume, recipiente_id], function(error) {
                     if (error) {
                         console.error(error);
+                        connection.release();
                         reject();
                     }
                     console.log('Volume do recipiente ' + recipiente_id + ' atualizado para ' + volume);
+                    connection.release();
                     resolve();
                 });
             });
@@ -82,9 +85,9 @@ module.exports = {
                 connection.query(sql, [data, qtd_litros_economizados], function(error) {
                     if (error) {
                         console.error(error);
+                        connection.release();
                         reject();
                     }
-
                     console.log('Criado registor de economia no dia ' + data + '. Volume registrado: ' + qtd_litros_economizados);
                     connection.release();
                     resolve();
@@ -111,10 +114,12 @@ module.exports = {
                 connection.query(sql, [qtd_litros_economizados, data], function(error) {
                     if (error) {
                         console.error(error);
+                        connection.release();
                         reject();
                     }
 
                     console.log('Volume economizado no dia ' + data + ' atualizado para: ' + qtd_litros_economizados);
+                    connection.release();
                     resolve();
                 });
             });
@@ -139,8 +144,10 @@ module.exports = {
                 connection.query(sql, [data], function(error, results) {
                     if (error) {
                         console.error(error);
+                        connection.release();
                         reject();
                     }
+                    connection.release();
                     resolve(results);
                 });
             });
@@ -163,8 +170,10 @@ module.exports = {
                 connection.query(sql, [], function(error, results) {
                     if (error) {
                         console.error(error);
+                        connection.release();
                         reject();
                     }
+                    connection.release();
                     resolve(results[0].qtd_litros_economizados);
                 });
             });
